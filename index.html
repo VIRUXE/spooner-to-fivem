@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spooner XML to FiveM Lua Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-neutral-800 text-neutral-100">
+    <div id="loadingIndicator" class="hidden flex fixed inset-0 bg-black bg-opacity-70 z-50 items-center justify-center">
+        <div class="spinner"></div>
+    </div>
+    <div id="toast" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-neutral-600 text-white p-3 rounded-md shadow-lg z-50 opacity-0 transition-opacity duration-500 text-sm">Copied to clipboard!</div>
+
+    <div class="max-w-screen-lg mx-auto p-8 bg-neutral-700 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold mb-6 text-center text-neutral-200">Spooner XML to FiveM Lua Converter</h1>
+
+        <div class="mb-6">
+            <label for="xmlFile" class="file-input-label block w-full border-2 border-dashed border-neutral-500 p-8 text-center cursor-pointer rounded-md transition-colors duration-300 hover:border-neutral-400">
+                <span id="file-name-display" class="text-neutral-400">Click or drag XML file here</span>
+                <input type="file" id="xmlFile" accept=".xml" class="hidden">
+            </label>
+        </div>
+
+        <div class="mb-6 text-center">
+            <button id="convertBtn" class="btn btn-primary py-3 px-6 rounded-md font-medium transition-colors duration-300 cursor-pointer bg-neutral-500 text-white hover:bg-neutral-600 w-full sm:w-auto" disabled>Convert to Lua</button>
+        </div>
+
+        <div class="mb-4">
+            <label for="luaOutput" class="block text-sm font-medium text-neutral-300 mb-1">Generated Lua Code:</label>
+            <textarea id="luaOutput" readonly class="w-full p-2 border rounded-md shadow-sm focus:ring-neutral-400 focus:border-neutral-400 bg-neutral-600 text-neutral-200 border border-neutral-500 min-h-[400px]" placeholder="Lua code will appear here..."></textarea>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
