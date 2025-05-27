@@ -7,6 +7,9 @@ const toast             = document.getElementById('toast');
 
 let xmlContent = null;
 
+// Get the file input label div
+const fileInputLabel = document.querySelector('.file-input-label');
+
 // Event Listeners
 xmlFileInput.addEventListener('change', (event) => {
 	const file = event.target.files[0];
@@ -46,6 +49,39 @@ convertBtn.addEventListener('click', () => {
 			loadingIndicator.style.display = 'none';
 		}
 	}, 50);
+});
+
+// Add drag and drop listeners to the file input label div
+fileInputLabel.addEventListener('dragover', (event) => {
+	event.preventDefault(); // Prevent default to allow drop
+	fileInputLabel.classList.add('drag-over'); // Optional: add a class for visual feedback
+});
+
+fileInputLabel.addEventListener('dragleave', () => {
+	fileInputLabel.classList.remove('drag-over'); // Optional: remove class
+});
+
+fileInputLabel.addEventListener('drop', (event) => {
+	event.preventDefault(); // Prevent default to process file
+	fileInputLabel.classList.remove('drag-over'); // Optional: remove class
+
+	const file = event.dataTransfer.files[0]; // Get the first dropped file
+	if (file) {
+		// Reuse the existing file reading logic
+		fileNameDisplay.textContent = file.name;
+		const reader = new FileReader();
+		reader.onload = (e) => {
+			xmlContent = e.target.result;
+			convertBtn.disabled = false;
+		};
+		reader.onerror = () => {
+			alert('Error reading file.');
+			resetUI();
+		};
+		reader.readAsText(file);
+	} else {
+		resetUI();
+	}
 });
 
 function resetUI() {
